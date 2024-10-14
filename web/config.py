@@ -1,6 +1,6 @@
 import os
 
-HOST = "10.0.0.99" # 部署服务器 IP(需修改)
+SERVER_HOST = "10.0.0.99"
 DOCKER_HOST = "0.0.0.0" # 在 docker 中运行时的 IP(不用修改)
 PORT = 8001 # 访问端口，需要和 docker-compose.yml 中的映射端口一致(看自己需求)
 GDB_HOST = "127.0.0.1" # (不用修改)
@@ -10,7 +10,7 @@ GDB_FRONTEND_PATH = os.path.abspath('../src/run.py') # gdb-frontend 路径(不�
 
 def init():
     global GDB_FRONTEND_PATH
-    global HOST
+    global SERVER_HOST
     global PORT
     global GDB_HOST
     global GDB_PORT

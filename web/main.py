@@ -116,8 +116,8 @@ async def create_instance(request):
             return aiohttp.web.json_response(
                 {
                     "user_id": user_id,
-                    "access_url": f"http://{config.HOST}:{config.PORT}?user_id={user_id}",
-                    "delete_url": f"http://{config.HOST}:{config.PORT}/delete?user_id={user_id}",
+                    "access_url": f"http://{config.SERVER_HOST}:{config.PORT}?user_id={user_id}",
+                    "delete_url": f"http://{config.SERVER_HOST}:{config.PORT}/delete?user_id={user_id}",
                     "success": True,
                 },
                 status=200,
@@ -164,8 +164,8 @@ async def list_instances(request):
             instances = [
                 {
                     "user_id": user_id,
-                    "access_url": f"http://{config.HOST}:{config.PORT}?user_id={user_id}",
-                    "delete_url": f"http://{config.HOST}:{config.PORT}/delete?user_id={user_id}",
+                    "access_url": f"http://{config.SERVER_HOST}:{config.PORT}?user_id={user_id}",
+                    "delete_url": f"http://{config.SERVER_HOST}:{config.PORT}/delete?user_id={user_id}",
                 }
                 for user_id, info in user_id_map.items()
             ]
@@ -218,7 +218,7 @@ async def proxy_root_request(request):
                 "error.html",
                 request,
                 {
-                    "return_url": f"http://{config.HOST}:{config.PORT}/?user_id={user_id}"
+                    "return_url": f"http://{config.SERVER_HOST}:{config.PORT}/?user_id={user_id}"
                 },
                 status=403,
             )
@@ -229,7 +229,7 @@ async def proxy_root_request(request):
                 "error.html",
                 request,
                 {
-                    "return_url": f"http://{config.HOST}:{config.PORT}/?user_id={user_id}"
+                    "return_url": f"http://{config.SERVER_HOST}:{config.PORT}/?user_id={user_id}"
                 },
                 status=403,
             )
@@ -382,7 +382,7 @@ async def proxy_http_request(request):
                 "error.html",
                 request,
                 {
-                    "return_url": f"http://{config.HOST}:{config.PORT}/?user_id={user_id}"
+                    "return_url": f"http://{config.SERVER_HOST}:{config.PORT}/?user_id={user_id}"
                 },
                 status=403,
             )
@@ -393,7 +393,7 @@ async def proxy_http_request(request):
                 "error.html",
                 request,
                 {
-                    "return_url": f"http://{config.HOST}:{config.PORT}/?user_id={user_id}"
+                    "return_url": f"http://{config.SERVER_HOST}:{config.PORT}/?user_id={user_id}"
                 },
                 status=403,
             )
@@ -427,7 +427,7 @@ async def proxy_http_request(request):
                         "error.html",
                         request,
                         {
-                            "return_url": f"http://{config.HOST}:{config.PORT}/?user_id={user_id}"
+                            "return_url": f"http://{config.SERVER_HOST}:{config.PORT}/?user_id={user_id}"
                         },
                         status=resp.status,
                     )
@@ -455,7 +455,7 @@ async def proxy_http_request(request):
         return aiohttp_jinja2.render_template(
             "error.html",
             request,
-            {"return_url": f"http://{config.HOST}:{config.PORT}/?user_id={user_id}"},
+            {"return_url": f"http://{config.SERVER_HOST}:{config.PORT}/?user_id={user_id}"},
             status=403,
         )
 
