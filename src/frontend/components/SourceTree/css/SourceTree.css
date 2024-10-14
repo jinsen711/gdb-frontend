@@ -1,0 +1,218 @@
+/*
+ * gdb-frontend is a easy, flexible and extensionable gui debugger
+ *
+ * https://github.com/rohanrhu/gdb-frontend
+ * https://oguzhaneroglu.com/projects/gdb-frontend/
+ *
+ * Licensed under GNU/GPLv3
+ * Copyright (C) 2019, Oğuzhan Eroğlu (https://oguzhaneroglu.com/) <rohanrhu2@gmail.com>
+*/
+
+.SourceTree {
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    user-select: none;
+}
+
+/* ---------------------- */
+
+.SourceTree_content {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+/* ---------------------- */
+
+.SourceTree.SourceTree__passive .SourceTree_box {
+    opacity: 0.4;
+}
+
+/* ---------------------- */
+
+.SourceTree_box_closeBtn {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 20px;
+    height: 18px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: color 100ms;
+}
+
+.SourceTree_box_closeBtn:hover {
+    color: #909090;
+}
+
+/* ---------------------- */
+
+.SourceTree_title {
+    padding: 10px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.SourceTree_items {
+    flex-grow: 1;
+    min-height: 100%;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    outline: none;
+    overflow: auto;
+}
+
+.SourceTree_items:focus {
+    border: 1px solid rgb(255 255 255 / 25%);
+    outline: none;
+}
+
+.SourceTree_items::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.SourceTree_items::-webkit-scrollbar-thumb {
+  background: #121212; 
+}
+
+.SourceTree_items:hover::-webkit-scrollbar-thumb {
+  background: #414141; 
+}
+
+.SourceTree_items_item {
+    position: relative;
+    line-height: 15px;
+    cursor: pointer;
+}
+
+.SourceTree_items_item_line {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1px;
+    height: 100%;
+    background: rgba(255,255,255, 0.1);
+    margin-left: 10px;
+}
+
+.SourceTree_items_item_sub:hover .SourceTree_items_item_line {
+    background: rgba(255,255,255, 0.2);
+}
+
+.SourceTree_items_item_button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.SourceTree_items_item_button_label {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    padding: 0px 10px;
+    min-height: 28px;
+}
+
+.SourceTree_items_item_button_openBtn {
+    height: 100%;
+    font-size: 10px;
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    display: none;
+}
+
+.SourceTree_items_item_button_openBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.SourceTree_items_item.SourceTree_items_item__dir > .SourceTree_items_item_button:hover .SourceTree_items_item_button_openBtn {
+    display: flex;
+}
+
+.SourceTree_items_item_button_label_indent {
+    content: ' ';
+}
+
+.SourceTree_items_item_button_label_icon {
+    display: none;
+    margin-right: 5px;
+    align-items: center;
+}
+
+.SourceTree_items_item__dir .SourceTree_items_item_button_label_icon {
+    color: #3487ed;
+}
+
+.SourceTree_items_item__file .SourceTree_items_item_button_label_icon {
+}
+
+.SourceTree_items_item__dir .SourceTree_items_item_button_label_icon__closedDir {
+    display: flex;
+}
+
+.SourceTree_items_item__dir.SourceTree__opened .SourceTree_items_item_button_label_icon__openedDir {
+    display: flex;
+}
+
+.SourceTree_items_item__dir.SourceTree__opened .SourceTree_items_item_button_label_icon__closedDir {
+    display: none;
+}
+
+.SourceTree_items_item.SourceTree_items_item__file .SourceTree_items_item_button_label_icon__file {
+    display: flex;
+    color: #f74848;
+}
+
+.SourceTree_items_item:not(.SourceTree__opened) .SourceTree_items_item_button_label_icon__closedDir {
+    display: flex;
+}
+
+.SourceTree_items_item:not(.SourceTree__opened) .SourceTree_items_item_button_label_icon__openedDir {
+    display: none;
+}
+
+.SourceTree_items_item.SourceTree_items_item__file .SourceTree_items_item_button_label_icon__openedDir {
+    display: none;
+}
+
+.SourceTree_items_item.SourceTree_items_item__file .SourceTree_items_item_button_label_icon__closedDir {
+    display: none;
+}
+
+.SourceTree_items_item_button_label_name {
+    display: flex;
+    align-items: center;
+}
+
+.SourceTree_items_item_button_label_name.SourceTree__dir {
+    font-weight: bold;
+}
+
+.SourceTree_items_item_button:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.SourceTree_items_item_sub {
+    position: relative;
+}
+
+.SourceTree_items_item_items {
+    position: relative;
+    z-index: 100;
+}
+
+/* ---------------------- */

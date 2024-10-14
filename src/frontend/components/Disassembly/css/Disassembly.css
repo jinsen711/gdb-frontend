@@ -1,0 +1,172 @@
+/*
+ * gdb-frontend is a easy, flexible and extensionable gui debugger
+ *
+ * https://github.com/rohanrhu/gdb-frontend
+ * https://oguzhaneroglu.com/projects/gdb-frontend/
+ *
+ * Licensed under GNU/GPLv3
+ * Copyright (C) 2019, Oğuzhan Eroğlu (https://oguzhaneroglu.com/) <rohanrhu2@gmail.com>
+*/
+
+.Disassembly {
+    text-align: center;
+    overflow-y: auto;
+    text-align: left;
+    height: 100%;
+}
+
+/* ---------------------- */
+
+.Disassembly_cr {
+    height: 100%;
+}
+
+.Disassembly_cr_c {
+    height: 100%;
+}
+
+.Disassembly_content {
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    overflow-x: auto;
+    resize: vertical;
+}
+
+/* ---------------------- */
+
+.Disassembly.Disassembly__passive {
+    opacity: 0.4;
+}
+
+/* ---------------------- */
+
+.Disassembly_items {
+    height: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+.Disassembly_items::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.Disassembly_items::-webkit-scrollbar-thumb {
+  background: #121212; 
+}
+
+.Disassembly_items:hover::-webkit-scrollbar-thumb {
+  background: #414141; 
+}
+
+.Disassembly_items_item {
+    display: flex;
+    flex-direction: row;
+    cursor: text;
+    white-space: nowrap;
+    line-height: 16px;
+    height: 28px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.Disassembly_items_item:not(.Disassembly__current):hover {
+    background: rgba(255,255,255,0.025);
+}
+
+.Disassembly_items_item.Disassembly__current {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.Disassembly_items_item_bp {
+    height: 100%;
+    width: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.Disassembly_items_item_bp_icon {
+    display: none;
+    width: 10px;
+    height: 10px;
+    background: #ff4c4c;
+    border-radius: 100%;
+}
+
+.Disassembly_items_item:hover .Disassembly_items_item_bp_icon {
+    display: block;
+    opacity: 0.5;
+}
+
+.Disassembly_items_item.Disassembly__current .Disassembly_items_item_bp {
+    background: linear-gradient(90deg, rgba(136, 173, 255, 0.5), rgba(255, 255, 255, 0));
+}
+
+.Disassembly_items_item.Disassembly__bp .Disassembly_items_item_bp_icon {
+    display: block;
+    opacity: 1;
+}
+
+.Disassembly_items_item_addr_val {
+}
+
+.Disassembly_items_item_name {
+    flex: 1 0;
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+.Disassembly_items_item_addr {
+    flex: 0 0;
+    display: flex;
+    align-items: center;
+    color: #8db1d0;
+    height: 100%;
+    justify-content: center;
+    flex-basis: 115px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.Disassembly_items_item_name {
+    flex: 1 0;
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+.Disassembly_items_item_function {
+    flex: 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+    color: #ffff6e;
+}
+
+.Disassembly_items_item_location {
+    flex: 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+.Disassembly_items_item_asm {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.Disassembly_items_item_asm_mnemonic {
+    color: #78ff7c;
+    padding-right: 10px;
+    width: 60px;
+}
+
+/* ---------------------- */

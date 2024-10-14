@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+    gdb_frontend:
+        image: hub.sr.inc/firmware/gdb_frontend:1.2
+        container_name: gdb_frontend
+        restart: always
+        init: True
+        ports:
+            - "8001:8001"
+        volumes:
+            - ./web:/data/gdb-frontend/web
+            - ./src:/data/gdb-frontend/src

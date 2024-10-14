@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>GDBFrontend</title>
+
+    <base href="{url_base}" target="_blank">
+
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <script type="text/javascript">
+        {js_init}
+    </script>
+
+    {gui_scripts}
+
+    <script type="text/javascript" src="thirdparty/jquery-3.5.1.min.js"></script>
+
+    <script type="text/javascript" src="thirdparty/ace/ace.js"></script>
+    <script type="text/javascript" src="thirdparty/ace/ext-modelist.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="thirdparty/xterm/css/xterm.css" />
+    <script type="text/javascript" src="thirdparty/xterm/lib/xterm.js"></script>
+
+    <script type="text/javascript" src="js/lib/AsynchronousSemaphore.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="thirdparty/icofont/icofont.min.css" />
+
+    <script type="text/javascript" src="components/GDBFrontend/js/CollabrationDraw.js"></script>
+    <script type="text/javascript" src="components/GDBFrontend/js/GDBFrontend.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/GDBFrontend/css/GDBFrontend.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/override.css" />
+
+    <script type="text/javascript">
+        GDBFrontend.gui_mode = {gui_mode};
+        GDBFrontend.is_verbose = {is_verbose};
+    </script>
+
+</head>
+<body>
+    <script type="text/javascript" src="components/MessageBox/js/MessageBox.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/MessageBox/css/MessageBox.css" />
+
+    <script type="text/javascript" src="components/Checkbox/js/Checkbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/Checkbox/css/Checkbox.css" />
+
+    <script type="text/javascript" src="components/FileBrowser/js/FileBrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/FileBrowser/css/FileBrowser.css" />
+
+    <script type="text/javascript" src="components/Disassembly/js/Disassembly.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/Disassembly/css/Disassembly.css" />
+    
+    <script type="text/javascript" src="components/Watches/js/Watches.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/Watches/css/Watches.css" />
+    
+    <script type="text/javascript" src="components/Registers/js/Registers.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/Registers/css/Registers.css" />
+
+    <script type="text/javascript" src="components/SourceTree/js/SourceTree.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/SourceTree/css/SourceTree.css" />
+
+    <script type="text/javascript" src="components/FileTabs/js/FileTabs.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/FileTabs/css/FileTabs.css" />
+
+    <script type="text/javascript" src="components/BreakpointsEditor/js/BreakpointsEditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/BreakpointsEditor/css/BreakpointsEditor.css" />
+
+    <script type="text/javascript" src="components/ThreadsEditor/js/ThreadsEditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/ThreadsEditor/css/ThreadsEditor.css" />
+
+    <script type="text/javascript" src="components/StackTrace/js/StackTrace.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/StackTrace/css/StackTrace.css" />
+
+    <script type="text/javascript" src="components/VariablesExplorer/js/VariablesExplorer.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/VariablesExplorer/css/VariablesExplorer.css" />
+    
+    <script type="text/javascript" src="components/LinkedListVisualizer/js/LinkedListVisualizer.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/LinkedListVisualizer/css/LinkedListVisualizer.css" />
+
+    <script type="text/javascript" src="components/AboutDialog/js/AboutDialog.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/AboutDialog/css/AboutDialog.css" />
+
+    <script type="text/javascript" src="components/FuzzyFinder/js/FuzzyFinder.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/FuzzyFinder/css/FuzzyFinder.css" />
+    
+    <script type="text/javascript" src="components/Resizable/js/Resizable.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/Resizable/css/Resizable.css" />
+    
+    <script type="text/javascript" src="components/Movable/js/Movable.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/Movable/css/Movable.css" />
+    
+    <script type="text/javascript" src="components/EvaluateExpression/js/EvaluateExpression.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/EvaluateExpression/css/EvaluateExpression.css" />
+    
+    <script type="text/javascript" src="components/ContextMenu/js/ContextMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/ContextMenu/css/ContextMenu.css" />
+    
+    <script type="text/javascript" src="components/ProcessManager/js/ProcessManager.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/ProcessManager/css/ProcessManager.css" />
+    
+    <script type="text/javascript" src="components/ArrayGraph/js/ArrayGraph.js"></script>
+    <link rel="stylesheet" type="text/css" href="components/ArrayGraph/css/ArrayGraph.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/override.css" />
+
+    <div class="GDBFrontend">
+        <div class="GDBFrontend_layout">
+            <div class="GDBFrontend_layout_top">
+                <div class="GDBFrontend_layout_top_left">
+                    <div class="GDBFrontend_mainMenu">
+                        <div class="GDBFrontend_load">
+                            <div class="GDBFrontend_load_connectBtn button1" title="{gdbserver}">
+                                <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/connect.png" alt="" draggable="false" />
+                                连接
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_runtimeControls">
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__continue">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="继续 (F6)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/resume.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__pause">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="暂停 (F7)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/pause.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__n">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="跳过 (F8)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/step-over.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__s">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="步入 (F9)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/step-into.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__si">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="步过 (F10)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/step-instruction.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__t">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="终止 (F11)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/terminate.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__evaluate">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="新表达式评估器 (Ctrl + R)">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/fx.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__processManager">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="新进程管理器">
+                                    <i class="icofont-settings-alt"></i>
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_runtimeControls_btn GDBFrontend_runtimeControls_btn__enhancedCollabration">
+                                <div class="GDBFrontend_runtimeControls_btn_btn" title="启用增强协作">
+                                    <img class="GDBFrontend_runtimeControls_btn_img" src="images/debug/collabration.png" alt="" draggable="false" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="GDBFrontend_layout_middle">
+                <div class="GDBFrontend_layout_middle_center" tabindex="0">
+                    <div class="GDBFrontend_fileTabsComp">
+                        {html_fileTabs}
+                    </div>
+                </div>
+                <div class="Resizable Resizable__right GDBFrontend_layout_middle_right">
+                    <div class="GDBFrontend_layout_middle_right_content">
+                        <div class="GDBFrontend_disassembly">
+                            <div class="GDBFrontend_disassembly_title">
+                                <div class="GDBFrontend_disassembly_title_label">
+                                    反汇编
+                                </div>
+                                <div class="GDBFrontend_disassembly_title_buttons">
+                                    <div class="GDBFrontend_disassembly_title_buttons_button GDBFrontend_disassembly_title_buttons_button__openTab">
+                                        <img class="GDBFrontend_disassembly_title_buttons_button_iconImg" src="images/debug/add-file.png" alt="" draggable="false">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="GDBFrontend_disassemblyComp">
+                                {html_disassembly}
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_watches">
+                            <div class="GDBFrontend_watches_title">
+                                监视
+                            </div>
+                            <div class="GDBFrontend_watchesComp">
+                                {html_watches}
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_breakpoints">
+                            <div class="GDBFrontend_breakpoints_title">
+                                断点
+                            </div>
+                            <div class="GDBFrontend_breakpointsEditorComp">
+                                {html_breakpointsEditor}
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_threads">
+                            <div class="GDBFrontend_threads_title">
+                                线程
+                            </div>
+                            <div class="GDBFrontend_threadsEditorComp">
+                                {html_threadsEditor}
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_stack">
+                            <div class="GDBFrontend_stack_title">
+                                调用栈
+                            </div>
+                            <div class="GDBFrontend_stackTraceComp">
+                                {html_stackTrace}
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_variables">
+                            <div class="GDBFrontend_variables_title">
+                                变量
+                            </div>
+                            <div class="GDBFrontend_variablesExplorerComp">
+                                {html_variablesExplorer}
+                            </div>
+                        </div>
+                        <div class="GDBFrontend_registers">
+                            <div class="GDBFrontend_registers_title">
+                                寄存器
+                            </div>
+                            <div class="GDBFrontend_registersComp">
+                                {html_registers}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Resizable_resizer">
+                        <div draggable="false" class="Resizable_resizer_draggable"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="Resizable Resizable__top GDBFrontend_layout_bottom">
+                <div class="GDBFrontend_terminal">
+                    <div class="GDBFrontend_terminal_terminal">
+                    </div>
+                </div>
+                <div class="Resizable_resizer">
+                    <div draggable="false" class="Resizable_resizer_draggable"></div>
+                </div>
+            </div>
+            <div class="GDBFrontend_layout_status">
+                <div class="GDBFrontend_layout_status_inferior">
+                    <div class="GDBFrontend_layout_status_inferior_icon">
+                        <i class="icofont-interface"></i>
+                    </div>
+                    <div class="GDBFrontend_layout_status_inferior_label">
+                        被调试程序:
+                    </div>
+                    <div class="GDBFrontend_layout_status_inferior_value">
+                    </div>
+                </div>
+                <div class="GDBFrontend_layout_status_runningStatus">
+                    <div class="GDBFrontend_layout_status_runningStatus_status GDBFrontend_layout_status_runningStatus_status__notRunning">
+                        <div class="GDBFrontend_layout_status_runningStatus_status_icon">
+                            <i class="icofont-close-line-squared"></i>
+                        </div>
+                        <div class="GDBFrontend_layout_status_runningStatus_status_label">
+                            未运行
+                        </div>
+                    </div>
+                    <div class="GDBFrontend_layout_status_runningStatus_status GDBFrontend_layout_status_runningStatus_status__running">
+                        <div class="GDBFrontend_layout_status_runningStatus_status_icon">
+                            <i class="icofont-play"></i>
+                        </div>
+                        <div class="GDBFrontend_layout_status_runningStatus_status_label">
+                            运行中
+                        </div>
+                    </div>
+                    <div class="GDBFrontend_layout_status_runningStatus_status GDBFrontend_layout_status_runningStatus_status__stopped">
+                        <div class="GDBFrontend_layout_status_runningStatus_status_icon">
+                            <i class="icofont-pause"></i>
+                        </div>
+                        <div class="GDBFrontend_layout_status_runningStatus_status_label">
+                            已暂停
+                        </div>
+                    </div>
+                </div>
+                <div class="GDBFrontend_layout_status_runTime">
+                    <div class="GDBFrontend_layout_status_runTime_icon">
+                        <i class="icofont-clock-time"></i>
+                    </div>
+                    <div class="GDBFrontend_layout_status_runTime_label">
+                        运行时间:
+                    </div>
+                    <div class="GDBFrontend_layout_status_runTime_value">
+                    </div>
+                </div>
+                <div class="GDBFrontend_layout_status_stepTime">
+                    <div class="GDBFrontend_layout_status_stepTime_icon">
+                        <i class="icofont-clock-time"></i>
+                    </div>
+                    <div class="GDBFrontend_layout_status_stepTime_label">
+                        步骤时间:
+                    </div>
+                    <div class="GDBFrontend_layout_status_stepTime_value">
+                    </div>
+                </div>
+                <div class="GDBFrontend_layout_status_collabration">
+                    <div class="GDBFrontend_layout_status_collabration_resolutionsNotEqual">
+                        <div class="GDBFrontend_layout_status_collabration_resolutionsNotEqual_icon">
+                            <i class="icofont-exclamation-square"></i>
+                        </div>
+                        <div class="GDBFrontend_layout_status_collabration_resolutionsNotEqual_label">
+                            所有客户端的分辨率不一致!
+                        </div>
+                    </div>
+                    <div class="GDBFrontend_layout_status_collabration_clearDrawings">
+                        <div class="GDBFrontend_layout_status_collabration_clearDrawings_icon">
+                            <i class="icofont-eraser"></i>
+                        </div>
+                        <div class="GDBFrontend_layout_status_collabration_clearDrawings_label" title="清除绘图 (Ctrl + Shift + C)">
+                            清除绘图
+                        </div>
+                    </div>
+                    <div class="GDBFrontend_layout_status_collabration_toggleDrawing" title="切换绘图模式 (Ctrl + Shift + X)">
+                        <div class="GDBFrontend_layout_status_collabration_toggleDrawing_icon">
+                            <i class="icofont-eraser"></i>
+                        </div>
+                        <div class="GDBFrontend_layout_status_collabration_toggleDrawing_label">
+                            绘图
+                        </div>
+                    </div>
+                </div>
+                <div class="GDBFrontend_layout_status_spacer">
+                </div>
+                <div class="GDBFrontend_layout_status_openTerminal">
+                    打开终端
+                </div>
+                <div class="GDBFrontend_layout_status_closeTerminal">
+                    关闭终端
+                </div>
+                <div class="GDBFrontend_layout_status_split">
+                    <div class="GDBFrontend_layout_status_split_label">
+                        分屏
+                    </div>
+                    <div class="GDBFrontend_layout_status_split_button GDBFrontend_layout_status_split_button__horizontal">
+                        ―
+                    </div>
+                    <div class="GDBFrontend_layout_status_split_button GDBFrontend_layout_status_split_button__vertical">
+                        |
+                    </div>
+                </div>
+                <div class="GDBFrontend_layout_status_terminalId">
+                </div>
+                <div class="GDBFrontend_layout_status_port">
+                </div>
+            </div>
+        </div>
+        <div class="GDBFrontend_evaluateExpressionComp">
+            {html_evaluateExpression}
+        </div>
+        <div class="GDBFrontend_variablesExplorerProto">
+            {html_variablesExplorer}
+        </div>
+        <div class="GDBFrontend_processManagerComp">
+            {html_processManager}
+        </div>
+        
+        <div class="GDBFrontend_movables">
+            <div class="GDBFrontend_evaluaters">
+                <div class="GDBFrontend_pointings">
+                </div>
+            </div>
+            <div class="GDBFrontend_processManagers">
+            </div>
+        </div>
+    </div>
+    
+    {html_fileBrowser}
+    {html_messageBox}
+    {html_aboutDialog}
+    {html_fuzzyFinder}
+
+    {plugin_htmls}
+</body>
+</html>
