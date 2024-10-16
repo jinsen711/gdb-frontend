@@ -8,11 +8,9 @@
 
 # 3 接口相关
 
-    config.HOST 和 config.PORT 是 ./web/config 中的配置.
-
 ## 3.1 创建 gdb-frontend 实例
 
-    config.HOST:config.PORT/create
+    10.0.0.99:8000/create
 
     返回值
     access_url: 访问实例地址
@@ -22,7 +20,7 @@
 
 ## 3.2 创建 gdb-frontend 实例时可预先传入要连接 gdbserver 的 host 和 port
 
-    config.HOST:config.PORT/create?chost=127.0.0.1&cport=1234
+    10.0.0.99:8000/create?chost=127.0.0.1&cport=1234
 
     返回值
     access_url: 访问实例地址
@@ -38,14 +36,14 @@
 
 ## 3.4 删除 gdb-frontend 实例
 
-    config.HOST:config.PORT/delete?user_id=XXXXXXXXXXXXX
+    10.0.0.99:8000/delete?user_id=XXXXXXXXXXXXX
 
     返回值
     success：判断是否删除成功，true 为成功 false 为失败
 
 ## 3.5 输出当前正在运行的 gdb-frontend 实例信息
 
-    config.HOST:config.PORT/list
+    10.0.0.99:8000/list
 
     返回值
     instances: gdb-frontend 实例列表
@@ -53,10 +51,17 @@
 
 ## 3.6 删除所有 gdb-frontend 实例
 
-    config.HOST:config.PORT/deleteall
+    10.0.0.99:8000/deleteall
 
     返回值
     success：判断是否删除成功，true 为成功 false 为失败
+
+# 4 使用案例
+
+    选择自己要添加的二进制文件, 例如 hello.out
+    使用 gdbserver 创建远程调试, gdbserver 10.0.0.99:8001 ./hello.out
+    浏览器 访问 10.0.0.99:8000/create?chost=10.0.0.99&cport=8001
+    返回值中的 access_url 复制到浏览器地址栏中, 即可进入 gdb-frontend 调试界面.
 
 # 注意
 
